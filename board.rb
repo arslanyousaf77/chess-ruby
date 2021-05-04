@@ -107,6 +107,13 @@ class Board
         end
     end
 
+    def get_piece_at_position(position)
+        positionArr = position.split(',')
+        row = positionArr[0].to_i
+        col = positionArr[1].to_i
+        @game_board[row][col]
+    end
+
 end
 
 Board.new.get_available_pieces("Black")

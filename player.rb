@@ -1,9 +1,10 @@
 $LOAD_PATH << '.'
 require "board"
+require "piece"
+require "pawn"
+require "rook"
 class Player
-    @@w_first_move = false
-    @@b_first_move = false
-    
+
     def initialize(type="", name = "")
         if type == "W" || type == "w"
             @player_type = "White"
@@ -16,7 +17,12 @@ class Player
         else
             raise "You must have to specify player type/color (w or b) as first argument"
         end
+
+        @pieces = {"Pawn"=> Pawn.new, "Rook" => Rook.new}
+
+        
     end
+
 
     def display_my_available_pieces(board)
        puts board.get_available_pieces(@player_type)
@@ -33,11 +39,20 @@ class Player
 
     def display_available_moves(board, piece, position)
        if board.validate_piece_position(piece, position, @player_type)
-        puts true
+        puts @pieces[piece].get_available_moves(self,board,piece,position)
        else
         puts "You entered wrong current position or wrong piece name!"
        end
     end
+
+    def get_player_name
+        @player_name
+    end
+
+    def get_player_type
+        @player_type
+    end
+
 end
 
-Player.new("w", "Arslan").display_available_moves(Board.new, "Pawn", "9,6")
+Player.new("w", "Arslan").display_available_moves(Board.new, "Pawn", "1,0")
