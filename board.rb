@@ -127,6 +127,7 @@ class Board
             captured = @game_board[new_row][new_col]
         end
         @game_board[new_row][new_col] = @game_board[current_row][current_col]
+        @game_board[current_row][current_col] = "-"
         return captured
         
     end
