@@ -5,8 +5,6 @@ class Game
         @black_player = Player.new("B")
     end
     def play()
-        do
-        
-            while 
+       
     end
 end
