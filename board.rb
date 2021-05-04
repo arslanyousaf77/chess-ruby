@@ -122,7 +122,12 @@ class Board
         new_positionArr = new_position.split(',')
         new_row = new_positionArr[0].to_i
         new_col = new_positionArr[1].to_i
+        captured = nil
+        if @game_board[new_row][new_col] != "-"
+            captured = @game_board[new_row][new_col]
+        end
         @game_board[new_row][new_col] = @game_board[current_row][current_col]
+        return captured
         
     end
 

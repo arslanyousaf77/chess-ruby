@@ -67,5 +67,11 @@ class Player
     end
 
 end
+brd = Board.new
+arslan = Player.new("w", "Arslan")
+#arslan.display_my_available_pieces(brd)
+#arslan.display_all_pieces(brd)
+puts arslan.get_available_moves(brd, "Pawn", "1,2")
 
-puts Player.new("w", "Arslan").move(Board.new, "Pawn", "1,0","2,0")
+puts arslan.move(brd, "Pawn", "1,2","2,2")
+arslan.display_my_available_pieces(brd)
