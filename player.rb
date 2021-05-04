@@ -37,12 +37,25 @@ class Player
        puts all_pieces[:opponent_available_pieces]
     end
 
-    def display_available_moves(board, piece, position)
+    def get_available_moves(board, piece, position)
        if board.validate_piece_position(piece, position, @player_type)
-        puts @pieces[piece].get_available_moves(self,board,piece,position)
+        @pieces[piece].get_available_moves(self,board,piece,position)
        else
-        puts "You entered wrong current position or wrong piece name!"
+        "You entered wrong current position or wrong piece name!"
        end
+    end
+
+    def move(board, piece, current_position, new_position)
+        new_pos = new_position
+        new_position = "("+new_position+")"
+        valid_moves = get_available_moves(board, piece, current_position)
+        if valid_moves != "You entered wrong current position or wrong piece name!"
+            if valid_moves.include?(new_position)
+                board.update_game_board(current_position, new_pos)
+                self.display_my_available_pieces(board)
+            end
+        end
+            
     end
 
     def get_player_name
@@ -55,4 +68,4 @@ class Player
 
 end
 
-Player.new("w", "Arslan").display_available_moves(Board.new, "Pawn", "1,0")
+puts Player.new("w", "Arslan").move(Board.new, "Pawn", "1,0","2,0")

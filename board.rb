@@ -114,6 +114,18 @@ class Board
         @game_board[row][col]
     end
 
+    def update_game_board(current_position, new_position)
+        current_positionArr = current_position.split(',')
+        current_row = current_positionArr[0].to_i
+        current_col = current_positionArr[1].to_i
+
+        new_positionArr = new_position.split(',')
+        new_row = new_positionArr[0].to_i
+        new_col = new_positionArr[1].to_i
+        @game_board[new_row][new_col] = @game_board[current_row][current_col]
+        
+    end
+
 end
 
 Board.new.get_available_pieces("Black")

@@ -70,6 +70,5 @@ class Pawn < Piece
         available_moves
     end
 
-    
 
 end
