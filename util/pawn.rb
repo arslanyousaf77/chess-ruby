@@ -21,18 +21,20 @@ class Pawn < Piece
                     available_moves.push("(#{row+1},#{col})")
                 end
             end
-            if row < 6 
-                if col == 0 && board.get_piece_at_position("#{row+1},#{col+1}") == "B Pawn"
-                    available_moves.push("(#{row+1},#{col+1})")
-
-                elsif col == 7 && board.get_piece_at_position("#{row+1},#{col-1}") == "B Pawn"
-                    available_moves.push("(#{row+1},#{col-1})")
-                
-                else
-                    if board.get_piece_at_position("#{row+1},#{col+1}") == "B Pawn"
+            if row < 7 
+                if col == 0 
+                    if board.get_piece_at_position("#{row+1},#{col+1}")[0]== "B"
                         available_moves.push("(#{row+1},#{col+1})")
                     end
-                    if board.get_piece_at_position("#{row+1},#{col-1}") == "B Pawn"
+                elsif col == 7 
+                    if board.get_piece_at_position("#{row+1},#{col-1}")[0] == "B"
+                        available_moves.push("(#{row+1},#{col-1})")   
+                    end
+                else
+                    if board.get_piece_at_position("#{row+1},#{col+1}")[0] == "B"
+                        available_moves.push("(#{row+1},#{col+1})")
+                    end
+                    if board.get_piece_at_position("#{row+1},#{col-1}")[0] == "B"
                         available_moves.push("(#{row+1},#{col-1})")
                     end
                 end
@@ -50,18 +52,20 @@ class Pawn < Piece
                     available_moves.push("(#{row-1},#{col})")
                 end
             end
-            if row > 1 
-                if col == 0 && board.get_piece_at_position("#{row-1},#{col+1}") == "W Pawn"
-                    available_moves.push("(#{row+1},#{col+1})")
-
-                elsif col == 7 && board.get_piece_at_position("#{row-1},#{col-1}") == "W Pawn"
-                    available_moves.push("(#{row+1},#{col-1})")
-                
+            if row > 0 
+                if col == 0 
+                    if board.get_piece_at_position("#{row-1},#{col+1}")[0]== "W"
+                        available_moves.push("(#{row+1},#{col+1})")
+                    end
+                elsif col == 7
+                    if board.get_piece_at_position("#{row-1},#{col-1}")[0]== "W"
+                        available_moves.push("(#{row+1},#{col-1})")   
+                    end
                 else
-                    if board.get_piece_at_position("#{row-1},#{col+1}") == "W Pawn"
+                    if board.get_piece_at_position("#{row-1},#{col+1}")[0]== "W"
                         available_moves.push("(#{row-1},#{col+1})")
                     end
-                    if board.get_piece_at_position("#{row-1},#{col-1}") == "W Pawn"
+                    if board.get_piece_at_position("#{row-1},#{col-1}")[0]== "W"
                         available_moves.push("(#{row-1},#{col-1})")
                     end
                 end

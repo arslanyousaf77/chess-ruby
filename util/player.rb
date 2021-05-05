@@ -18,8 +18,8 @@ class Player
             raise "You must have to specify player type/color (w or b) as first argument"
         end
 
+        @captured_pieces = Array.new
         @pieces = {"Pawn"=> Pawn.new, "Rook" => Rook.new}
-
         
     end
 
@@ -52,10 +52,17 @@ class Player
         if valid_moves != "You entered wrong current position or wrong piece name!"
             if valid_moves.include?(new_position)
                 board.update_game_board(current_position, new_pos)
-                self.display_my_available_pieces(board)
+            else
+                puts "Oops, New position is not a valid move!"
+                return 1
             end
+        elsif valid_moves == "You entered wrong current position or wrong piece name!"
+            puts "Oops, You entered wrong current position or wrong piece name!"
+            return 2
+        elsif valid_moves.empty?
+            puts "Oops, No valid moves are available for this piece!"
+            return 3
         end
-            
     end
 
     def get_player_name
@@ -66,12 +73,12 @@ class Player
         @player_type
     end
 
-end
-brd = Board.new
-arslan = Player.new("w", "Arslan")
-#arslan.display_my_available_pieces(brd)
-#arslan.display_all_pieces(brd)
-puts arslan.get_available_moves(brd, "Pawn", "1,2")
+    def add_captured_piece(captured)
+        @captured_pieces.push(captured)
+    end
 
-puts arslan.move(brd, "Pawn", "1,2","2,2")
-arslan.display_my_available_pieces(brd)
+    def display_captured_pieces
+        puts @captured_pieces if !@captured_pieces.empty?
+        puts "No Captured Piece yet" if @captured_pieces.empty?
+    end
+end

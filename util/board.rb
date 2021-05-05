@@ -27,7 +27,7 @@ class Board
         @game_board[7][0] = "B Rook"
         @game_board[7][1] = "B Knight"
         @game_board[7][2] = "B Bishop"
-        @game_board[7][3] = "B Queen"
+        @game_board[2][3] = "B Queen"
         @game_board[7][4] = "B King"
         @game_board[7][5] = "B Bishop"
         @game_board[7][6] = "B Knight"
@@ -43,7 +43,7 @@ class Board
             row.each_with_index do | element, col_index |
                 if element[0] == type
                     piece = {}
-                    piece[:name] = element.delete(type+" ")
+                    piece[:name] = element[2,element.length]
                     piece[:position] = row_index.to_s + ","+col_index.to_s
                     available_pieces.push(piece)
                 end
@@ -65,12 +65,12 @@ class Board
             row.each_with_index do | element, col_index |
                 if element[0] == my_type
                     piece = {}
-                    piece[:name] = element.delete(my_type+" ")
+                    piece[:name] = element[2,element.length]
                     piece[:position] = row_index.to_s + ","+col_index.to_s
                     my_available_pieces.push(piece)
                 elsif element[0] == opponent_type
                     piece = {}
-                    piece[:name] = element.delete(opponent_type+" ")
+                    piece[:name] = element[2,element.length]
                     piece[:position] = row_index.to_s + ","+col_index.to_s
                     opponent_available_pieces.push(piece)
                 end
@@ -124,14 +124,13 @@ class Board
         new_col = new_positionArr[1].to_i
         captured = nil
         if @game_board[new_row][new_col] != "-"
-            captured = @game_board[new_row][new_col]
+            captured = {}
+            piece_name = @game_board[new_row][new_col]
+            captured[:name] = piece_name[2,piece_name.length]
+            captured[:position] = "(#{new_row},#{new_col})"
         end
         @game_board[new_row][new_col] = @game_board[current_row][current_col]
         @game_board[current_row][current_col] = "-"
         return captured
-        
     end
-
 end
-
-Board.new.get_available_pieces("Black")
